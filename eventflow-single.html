@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EventFlow event management and budget analysis dashboard">
+  <title>EventFlow | Event Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+ :root{--ink:#20202b;--muted:#858594;--line:#ececf2;--bg:#f7f7fb;--purple:#6b5ce7;--purple-light:#f0edff;--green:#2fa67a;--orange:#e99a43;--blue:#4f8be8;--radius:18px}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:92px}body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",sans-serif;font-size:14px}.app-shell{min-height:100vh}.sidebar{width:244px;position:fixed;inset:0 auto 0 0;background:#fff;border-right:1px solid var(--line);padding:30px 18px 18px;display:flex;flex-direction:column;z-index:10}.brand{display:flex;align-items:center;gap:11px;margin:0 8px 48px;color:var(--ink);font:800 21px Manrope,sans-serif;text-decoration:none;letter-spacing:-.8px}.brand-mark{width:34px;height:34px;display:grid;place-items:center;border-radius:11px;background:var(--purple);color:#fff;font:800 19px Manrope;box-shadow:0 7px 16px #6b5ce733}.brand-dot,.heading-period{color:var(--purple)}.workspace-label,.eyebrow{font-size:10px;font-weight:700;letter-spacing:1.5px;color:#9a9aa8}.workspace-label{padding:0 12px;margin-bottom:13px}.nav-menu{display:grid;gap:5px}.nav-link{display:flex;align-items:center;gap:13px;padding:12px;border-radius:11px;text-decoration:none;color:#747484;font-weight:600;transition:.2s}.nav-link:hover,.nav-link.active{background:var(--purple-light);color:var(--purple)}.nav-icon{font-size:19px;width:20px;text-align:center}.sidebar-bottom{margin-top:auto}.help-card{background:#f8f7ff;border:1px solid #efedff;border-radius:14px;padding:16px;margin-bottom:20px}.help-icon{color:var(--purple);font-size:20px;margin-bottom:12px}.help-card strong{font-size:13px}.help-card p{font-size:11px;line-height:1.6;color:#828195;margin:7px 0 13px}.help-card a{color:var(--purple);font-size:11px;font-weight:700;text-decoration:none}.help-card a span{float:right}.profile{display:flex;align-items:center;gap:10px;padding:14px 2px 2px;border-top:1px solid var(--line)}.avatar,.top-avatar{display:grid;place-items:center;background:#e7e3ff;color:#5e50d3;border-radius:50%;font-size:10px;font-weight:800;width:34px;height:34px}.profile strong{display:block;font-size:11px}.profile small{display:block;color:var(--muted);font-size:10px;margin-top:3px}.profile-dots{margin-left:auto;color:#999}.main-content{margin-left:244px;padding:0 34px 24px;max-width:1800px}.topbar{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);margin-bottom:34px}.breadcrumb{color:#9a9aa8;font-size:12px}.breadcrumb span{padding:0 10px;color:#c3c3ce}.breadcrumb strong{color:#41414e}.topbar-right{display:flex;align-items:center;gap:10px;color:#858594;font-size:11px}.live-dot{width:7px;height:7px;border-radius:50%;background:#38bd88}.icon-button{width:32px;height:32px;border:1px solid var(--line);background:#fff;border-radius:10px;color:#666;cursor:pointer;font-size:18px}.top-avatar{width:31px;height:31px}.mobile-menu{display:none}.page-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}.page-heading .eyebrow{margin:0 0 9px}.page-heading h1{font:800 30px Manrope,sans-serif;letter-spacing:-1.2px;margin:0}.subheading{color:var(--muted);font-size:12px;margin:9px 0 0}.button{border:0;border-radius:10px;padding:11px 15px;font:700 12px "DM Sans",sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:transform .15s,background .15s;white-space:nowrap}.button:active{transform:scale(.98)}.button-primary{background:var(--purple);color:#fff;box-shadow:0 5px 12px #6b5ce72b}.button-primary:hover{background:#5949d5}.button-dark{background:#252532;color:#fff;padding:9px 13px}.button-outline{background:#fff;color:#4b4b5a;border:1px solid #e7e7ef}.button-outline:hover{border-color:#c5bfff;color:var(--purple)}.stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:20px}.stat-card,.panel{background:#fff;border:1px solid #eeeef4;border-radius:var(--radius);box-shadow:0 3px 16px #29294a04}.stat-card{padding:19px 20px 17px;min-width:0}.stat-top{display:flex;align-items:center;justify-content:space-between}.stat-label,.muted-label{color:#838392;font-size:11px;font-weight:600}.stat-icon{width:33px;height:33px;border-radius:11px;display:grid;place-items:center;font-size:17px;font-weight:700}.purple{background:#f0edff;color:#7060e6}.orange{background:#fff2e5;color:#e89a42}.blue{background:#eaf3ff;color:#4f8be8}.green{background:#e7f8f0;color:#2fa67a}.stat-value{font:800 clamp(21px,2vw,27px) Manrope,sans-serif;letter-spacing:-.8px;margin:15px 0 13px;white-space:nowrap}.stat-foot{display:flex;align-items:center;gap:8px;color:#9b9ba8;font-size:10px;flex-wrap:wrap}.status-pill{font-size:9px;font-weight:700;border-radius:6px;padding:5px 7px}.status-pill.neutral{background:#f2f2f7;color:#858594}.status-pill.warning{background:#fff3e6;color:#d58a31}.status-pill.success{background:#e8f8f0;color:#259b6c}.content-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(350px,.9fr);gap:18px;margin-bottom:20px}.panel{padding:23px;min-width:0}.panel-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:15px}.panel-heading .eyebrow{margin:0 0 7px}.panel h2{font:800 18px Manrope,sans-serif;letter-spacing:-.45px;margin:0}.period-select,.count-badge{border:1px solid #eeeef4;background:#fff;color:#777786;border-radius:8px;padding:8px 10px;font-size:10px;white-space:nowrap}.period-select span{margin-left:9px}.budget-summary{display:flex;align-items:flex-end;justify-content:space-between;margin:28px 0 5px}.big-amount{font:800 29px Manrope,sans-serif;letter-spacing:-1px;margin:6px 0 8px}.budget-note{display:flex;align-items:center;gap:6px;color:#2fa67a;font-size:10px}.mini-check{background:#e6f8ef;border-radius:50%;width:16px;height:16px;display:grid;place-items:center;font-size:9px}.budget-total{text-align:right}.budget-total strong{display:block;font:700 13px Manrope;margin-top:8px}.chart-wrap{height:188px;position:relative;max-width:430px;margin:6px auto 0}.chart-wrap canvas{width:100%;height:100%;display:block}.chart-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}.chart-center span,.chart-center small{display:block;color:#9696a3;font-size:10px}.chart-center strong{display:block;font:800 22px Manrope;margin:5px 0 3px;letter-spacing:-.5px}.chart-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 20px;margin:8px 0 24px}.legend-item{display:flex;align-items:center;gap:7px;color:#737382;font-size:10px}.legend-dot{width:8px;height:8px;border-radius:3px;flex:none}.legend-item strong{margin-left:auto;color:#454552;font-size:10px}.budget-input-row{border-top:1px solid var(--line);padding-top:17px;display:flex;align-items:center;justify-content:space-between;gap:12px}.budget-input-row label{font-size:11px;color:#777786;font-weight:600}.input-with-button{display:flex;align-items:center;border:1px solid #e8e8ef;border-radius:9px;padding-left:10px;gap:7px;color:#9696a3}.input-with-button input{width:105px;border:0;outline:0;font:600 12px "DM Sans";color:var(--ink);padding:9px 0}.panel-description{color:#9292a0;font-size:11px;line-height:1.6;margin:8px 0 17px}.panel-description strong{color:#666675}.task-form{display:flex;gap:7px;margin-bottom:15px}.task-form input,.task-form select,.search-bar input{min-width:0;border:1px solid #e9e9f0;border-radius:9px;background:#fff;outline:0;padding:10px;font:11px "DM Sans";color:#555564}.task-form input{flex:1}.task-form select{width:88px}.task-form input:focus,.search-bar input:focus,.modal input:focus,.modal textarea:focus,.modal select:focus{border-color:#b7adff;box-shadow:0 0 0 3px #6b5ce710}.add-square{width:36px;border:0;border-radius:9px;background:var(--purple);color:#fff;font-size:20px;cursor:pointer}.priority-key{display:flex;gap:14px;color:#9292a0;font-size:10px;margin:0 0 12px}.priority-key span{display:flex;align-items:center;gap:5px}.key-dot{width:7px;height:7px;border-radius:50%}.key-dot.high{background:#e96b77}.key-dot.medium{background:#efa94d}.key-dot.low{background:#58b99b}.task-list{display:grid;gap:7px}.task-item{display:flex;align-items:center;gap:9px;padding:10px;border:1px solid #f0f0f5;border-radius:10px}.task-check{width:16px;height:16px;accent-color:var(--purple);cursor:pointer;flex:none}.task-title{flex:1;min-width:0;font-size:11px;font-weight:600;overflow-wrap:anywhere}.task-title.done{text-decoration:line-through;color:#aaa}.priority-tag{font-size:9px;font-weight:700;border-radius:5px;padding:5px 6px}.priority-tag.high{background:#fff0f1;color:#db6672}.priority-tag.medium{background:#fff5e8;color:#d69236}.priority-tag.low{background:#eaf8f2;color:#299d77}.task-delete,.row-action{border:0;background:transparent;color:#a4a4b0;cursor:pointer;font-size:15px;padding:4px}.task-delete:hover,.row-action:hover{color:#df5867}.algorithm-note{display:flex;align-items:flex-start;gap:10px;background:#f8f7ff;border-radius:10px;padding:12px;margin-top:16px}.algorithm-symbol{width:26px;height:26px;display:grid;place-items:center;border-radius:8px;background:#e9e5ff;color:var(--purple);flex:none}.algorithm-note strong{font-size:10px}.algorithm-note p{font-size:10px;line-height:1.5;color:#8d8c9f;margin:4px 0 0}.events-panel,.expenses-panel{margin-bottom:20px}.events-panel .panel-heading,.expenses-panel .panel-heading{align-items:center;margin-bottom:18px}.events-panel .panel-description,.expenses-panel .panel-description{margin-bottom:0}.table-wrap{overflow-x:auto;width:100%}table{border-collapse:collapse;width:100%;min-width:650px;text-align:left}thead th{font-size:9px;letter-spacing:.7px;color:#a0a0ad;font-weight:700;background:#fafafd;padding:12px 13px;border-top:1px solid #f0f0f5;border-bottom:1px solid #f0f0f5}tbody td{padding:14px 13px;border-bottom:1px solid #f2f2f6;font-size:11px;color:#777785;white-space:nowrap}tbody tr:last-child td{border-bottom:0}.event-name-cell{display:flex;align-items:center;gap:10px}.event-color{width:31px;height:31px;border-radius:9px;display:grid;place-items:center;font-size:14px;flex:none}.event-name-cell strong{display:block;color:#353542;font-size:11px}.event-name-cell small{display:block;color:#a0a0ad;font-size:9px;margin-top:4px;max-width:210px;overflow:hidden;text-overflow:ellipsis}.event-budget{font-weight:700;color:#434350}.event-status{display:inline-block;border-radius:6px;padding:5px 7px;font-size:9px;font-weight:700}.event-status.planning{background:#f0edff;color:#7160e1}.event-status.confirmed{background:#e7f8f0;color:#299d77}.event-status.in-progress{background:#fff4e6;color:#d79339}.event-actions{display:flex;gap:3px}.row-action{font-size:14px}.table-footer{display:flex;justify-content:space-between;gap:10px;color:#a0a0ad;font-size:10px;padding-top:14px}.footer-dot{color:var(--purple);padding:0 3px}.search-bar{display:flex;align-items:center;gap:8px;margin:20px 0 5px}.search-symbol{font-size:22px;color:#9999a7}.search-bar input{flex:1;padding:11px}.search-feedback{min-height:24px;font-size:10px;color:#8c8c9b;padding:5px 0 10px}.search-feedback.success{color:#269b70}.search-feedback.error{color:#d45f6d}.expense-add-row{display:flex;align-items:center;justify-content:space-between;padding-top:14px}.expense-add-row span{font-size:10px;color:#a0a0ad}.expense-id{font:700 11px Manrope;color:var(--purple)}.category-label{display:inline-flex;align-items:center;gap:7px}.category-label i{width:7px;height:7px;border-radius:2px}.amount-cell{font-weight:700;color:#3d3d49}.concepts-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:23px}.concept-card{display:flex;gap:14px;padding:19px;background:#fff;border:1px solid #eeeef4;border-radius:15px}.concept-icon{width:39px;height:39px;border-radius:12px;display:grid;place-items:center;font-weight:800;flex:none}.concept-card h3{font:700 12px Manrope;margin:2px 0 8px}.concept-card p{color:#8c8c9a;font-size:10px;line-height:1.6;margin:0 0 10px}.concept-card code{font-size:9px;color:#7060df;background:#f6f4ff;padding:5px 7px;border-radius:5px;display:inline-block;overflow-wrap:anywhere}.footer{display:flex;align-items:center;gap:8px;color:#a1a1ae;font-size:10px;padding:4px 0 12px}.footer:first-letter{color:var(--purple)}.footer-right{margin-left:auto}.modal{width:min(510px,calc(100% - 28px));border:1px solid #eeeef4;border-radius:18px;padding:0;box-shadow:0 25px 90px #20202b30;color:var(--ink)}.modal::backdrop{background:#20202b70;backdrop-filter:blur(3px)}.modal form{padding:25px}.modal-heading{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:23px}.modal-heading .eyebrow{margin:0 0 7px}.modal h2{font:800 20px Manrope;margin:0}.close-modal{border:0;background:#f5f5f9;border-radius:8px;width:30px;height:30px;font-size:21px;color:#777;cursor:pointer}.modal label{display:block;font-size:11px;font-weight:700;color:#646473;margin-bottom:15px}.modal input,.modal textarea,.modal select{display:block;width:100%;border:1px solid #e7e7ef;border-radius:9px;padding:11px;margin-top:7px;font:12px "DM Sans";outline:0;color:#333;background:#fff}.modal textarea{resize:vertical}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;border-top:1px solid var(--line);padding-top:17px;margin-top:8px}.toast{position:fixed;bottom:25px;right:25px;background:#252532;color:#fff;padding:13px 17px;border-radius:11px;box-shadow:0 12px 30px #20202b25;font-size:12px;opacity:0;transform:translateY(12px);pointer-events:none;transition:.25s;z-index:30}.toast.show{opacity:1;transform:translateY(0)}.empty-state{text-align:center;color:#a0a0ad;padding:22px!important;font-size:11px!important}
+@media(max-width:1200px){.main-content{padding:0 22px 22px}.sidebar{width:220px}.main-content{margin-left:220px}.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.content-grid{grid-template-columns:1fr}.task-panel{min-height:0}.task-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.sidebar{transform:translateX(-100%);transition:transform .25s;width:250px;box-shadow:none}.sidebar.open{transform:translateX(0);box-shadow:12px 0 35px #20202b18}.main-content{margin-left:0;padding:0 14px 20px}.topbar{height:62px;margin-bottom:25px}.mobile-menu{display:block;border:1px solid var(--line);background:#fff;border-radius:9px;width:34px;height:34px;color:#666}.breadcrumb{margin-right:auto;margin-left:10px}.topbar-right{gap:7px}.saved-label{display:none}.page-heading{align-items:flex-start;gap:12px}.page-heading h1{font-size:25px}.page-heading .button{padding:10px;font-size:11px}.subheading{max-width:250px;line-height:1.5}.stats-grid{gap:10px}.stat-card{padding:15px}.stat-value{font-size:22px}.stat-foot{gap:5px}.content-grid{gap:13px}.panel{padding:17px}.budget-summary{margin-top:22px}.big-amount{font-size:25px}.budget-input-row{align-items:flex-start;flex-direction:column}.input-with-button{width:100%}.input-with-button input{flex:1}.task-list{grid-template-columns:1fr}.events-panel .panel-heading,.expenses-panel .panel-heading{align-items:flex-start}.table-footer{flex-direction:column}.search-bar{flex-wrap:wrap}.search-bar input{flex-basis:calc(100% - 35px)}.search-bar .button{flex:1}.concepts-grid{grid-template-columns:1fr;gap:10px}.footer{flex-wrap:wrap;line-height:1.5}.footer-right{width:100%;margin-left:0}.expense-add-row{align-items:flex-start;gap:10px;flex-direction:column}}
+@media(max-width:390px){.stats-grid{grid-template-columns:1fr 1fr}.stat-card{padding:12px}.stat-value{font-size:19px}.stat-foot{font-size:9px}.status-pill{font-size:8px}.page-heading h1{font-size:22px}.page-heading .button{font-size:10px}.chart-legend{gap:10px}.period-select{font-size:9px}.panel h2{font-size:16px}}
+
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="EventFlow home"><span class="brand-mark">E</span><span>eventflow<span class="brand-dot">.</span></span></a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav-menu" aria-label="Main navigation">
+        <a class="nav-link active" href="#dashboard"><span class="nav-icon">▦</span> Overview</a>
+        <a class="nav-link" href="#events"><span class="nav-icon">▣</span> Events</a>
+        <a class="nav-link" href="#tasks"><span class="nav-icon">↟</span> Task priority</a>
+        <a class="nav-link" href="#budget"><span class="nav-icon">◫</span> Budget analysis</a>
+        <a class="nav-link" href="#expenses"><span class="nav-icon">⌕</span> Expense records</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card"><div class="help-icon">✦</div><strong>Project demo</strong><p>Explore how arrays, priority queues and binary search power the system.</p><a href="#about">Explore concepts <span>↗</span></a></div>
+        <div class="profile"><div class="avatar">EF</div><div><strong>EventFlow Admin</strong><small>Project workspace</small></div><span class="profile-dots">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Toggle navigation">☰</button>
+        <div class="breadcrumb">Workspace <span>/</span> <strong>Overview</strong></div>
+        <div class="topbar-right"><span class="live-dot"></span><span class="saved-label">Demo data loaded</span><button class="icon-button" id="resetDemo" title="Reset sample data" aria-label="Reset sample data">↻</button><div class="top-avatar">EF</div></div>
+      </header>
+
+      <section class="page-heading" id="dashboard">
+        <div><p class="eyebrow">FRIDAY, OCTOBER 23, 2026</p><h1>Good afternoon<span class="heading-period">.</span></h1><p class="subheading">Here’s what’s happening with your events today.</p></div>
+        <button class="button button-primary" id="addEventTop"><span>＋</span> Create event</button>
+      </section>
+
+      <section class="stats-grid" aria-label="Dashboard summary">
+        <article class="stat-card"><div class="stat-top"><span class="stat-label">Total events</span><span class="stat-icon purple">▣</span></div><div class="stat-value" id="totalEvents">04</div><div class="stat-foot"><span class="status-pill neutral">All events</span><span>in your workspace</span></div></article>
+        <article class="stat-card"><div class="stat-top"><span class="stat-label">Pending tasks</span><span class="stat-icon orange">↟</span></div><div class="stat-value" id="pendingTasks">08</div><div class="stat-foot"><span class="status-pill warning">Needs attention</span><span>across all events</span></div></article>
+        <article class="stat-card"><div class="stat-top"><span class="stat-label">Total budget</span><span class="stat-icon blue">₹</span></div><div class="stat-value" id="totalBudget">₹2,50,000</div><div class="stat-foot"><span class="status-pill neutral">Allocated</span><span>for planned events</span></div></article>
+        <article class="stat-card"><div class="stat-top"><span class="stat-label">Total expenses</span><span class="stat-icon green">↗</span></div><div class="stat-value" id="totalExpenses">₹1,24,500</div><div class="stat-foot"><span class="status-pill success" id="expensePercent">49.8% used</span><span>of total budget</span></div></article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel budget-panel" id="budget">
+          <div class="panel-heading"><div><p class="eyebrow">FINANCIAL OVERVIEW</p><h2>Budget analysis</h2></div><span class="period-select">All events <span>⌄</span></span></div>
+          <div class="budget-summary"><div><span class="muted-label">Remaining balance</span><div class="big-amount" id="remainingBalance">₹1,25,500</div><span class="budget-note"><span class="mini-check">✓</span> <span id="budgetNote">Within allocated budget</span></span></div><div class="budget-total"><span class="muted-label">Allocated budget</span><strong id="allocatedBudgetText">₹2,50,000</strong></div></div>
+          <div class="chart-wrap"><canvas id="budgetChart" aria-label="Budget by category chart" role="img"></canvas><div class="chart-center"><span>Total spent</span><strong id="chartSpent">₹1.25L</strong><small id="chartPercent">49.8% of budget</small></div></div>
+          <div class="chart-legend" id="chartLegend"></div>
+          <div class="budget-input-row"><label for="allocatedBudget">Update allocated budget</label><div class="input-with-button"><span>₹</span><input type="number" min="0" id="allocatedBudget" value="250000" aria-label="Allocated budget"><button class="button button-dark" id="saveBudget">Save</button></div></div>
+        </article>
+
+        <article class="panel task-panel" id="tasks">
+          <div class="panel-heading"><div><p class="eyebrow">STAY ON TRACK</p><h2>Priority tasks</h2></div><span class="count-badge" id="taskCount">5 tasks</span></div>
+          <p class="panel-description">Tasks are ordered by priority using an <strong>array-based priority queue</strong>.</p>
+          <form id="taskForm" class="task-form"><input id="taskTitle" placeholder="Add a task..." required maxlength="90" aria-label="Task title"><select id="taskPriority" aria-label="Task priority"><option value="1">High</option><option value="2" selected>Medium</option><option value="3">Low</option></select><button class="add-square" aria-label="Add task">＋</button></form>
+          <div class="priority-key"><span><i class="key-dot high"></i>High</span><span><i class="key-dot medium"></i>Medium</span><span><i class="key-dot low"></i>Low</span></div>
+          <div class="task-list" id="taskList"></div>
+          <div class="algorithm-note"><span class="algorithm-symbol">⌘</span><div><strong>Priority queue in action</strong><p>Lower number = higher priority. The array is sorted after each insert.</p></div></div>
+        </article>
+      </section>
+
+      <section class="panel events-panel" id="events">
+        <div class="panel-heading"><div><p class="eyebrow">YOUR WORKSPACE</p><h2>Upcoming events</h2><p class="panel-description">Manage event details and keep every plan organized.</p></div><button class="button button-outline" id="addEvent">＋ Add event</button></div>
+        <div class="table-wrap"><table><thead><tr><th>EVENT NAME</th><th>DATE</th><th>VENUE</th><th>BUDGET</th><th>STATUS</th><th></th></tr></thead><tbody id="eventTable"></tbody></table></div>
+        <div class="table-footer"><span id="eventCountLabel">Showing 4 events</span><span>Sample project data <span class="footer-dot">•</span> Stored in this browser</span></div>
+      </section>
+
+      <section class="panel expenses-panel" id="expenses">
+        <div class="panel-heading"><div><p class="eyebrow">TRANSACTION LOG</p><h2>Expense records</h2><p class="panel-description">Search an expense by ID with binary search on sorted IDs.</p></div><span class="count-badge" id="expenseCount">6 records</span></div>
+        <form class="search-bar" id="expenseSearchForm"><span class="search-symbol">⌕</span><input id="expenseSearchId" type="number" min="1" placeholder="Enter expense ID (e.g. 1003)" aria-label="Expense ID to search"><button class="button button-primary" type="submit">Binary search</button><button class="button button-outline" type="button" id="showAllExpenses">Show all</button></form>
+        <div class="search-feedback" id="searchFeedback" aria-live="polite">Tip: search IDs are sorted before binary search is performed.</div>
+        <div class="table-wrap"><table><thead><tr><th>EXPENSE ID</th><th>DESCRIPTION</th><th>CATEGORY</th><th>DATE</th><th>AMOUNT</th><th></th></tr></thead><tbody id="expenseTable"></tbody></table></div>
+        <div class="expense-add-row"><button class="button button-outline" id="addExpense">＋ Record expense</button><span>Records are sorted by ID for searching.</span></div>
+      </section>
+
+      <section class="concepts-grid" id="about">
+        <article class="concept-card"><div class="concept-icon purple">[ ]</div><div><h3>Array-based priority queue</h3><p>Each task is stored in an array with a priority value. Tasks are sorted so the most important item appears first.</p><code>tasks.sort((a, b) =&gt; a.priority - b.priority)</code></div></article>
+        <article class="concept-card"><div class="concept-icon blue">⌕</div><div><h3>Binary search</h3><p>Expense records are sorted by ID. Binary search checks the middle ID and halves the search range at each step.</p><code>O(log n) search time</code></div></article>
+      </section>
+      <footer class="footer">EventFlow <span>•</span> Event Management &amp; Budget Analysis System <span class="footer-right">Data Structures Project Demo</span></footer>
+    </main>
+  </div>
+
+  <dialog id="eventDialog" class="modal"><form id="eventForm" method="dialog"><div class="modal-heading"><div><p class="eyebrow">EVENT DETAILS</p><h2 id="eventModalTitle">Create event</h2></div><button type="button" class="close-modal" data-close="eventDialog" aria-label="Close">×</button></div><input type="hidden" id="eventId"><label>Event name<input id="eventName" required maxlength="90" placeholder="e.g. Annual Tech Summit"></label><div class="form-row"><label>Date<input id="eventDate" type="date" required></label><label>Budget (₹)<input id="eventBudget" type="number" min="0" required placeholder="50000"></label></div><label>Venue<input id="eventVenue" required maxlength="120" placeholder="Venue or location"></label><label>Description<textarea id="eventDescription" rows="3" maxlength="350" placeholder="A short event description..."></textarea></label><div class="modal-actions"><button type="button" class="button button-outline" data-close="eventDialog">Cancel</button><button type="submit" class="button button-primary">Save event</button></div></form></dialog>
+
+  <dialog id="expenseDialog" class="modal"><form id="expenseForm" method="dialog"><div class="modal-heading"><div><p class="eyebrow">TRANSACTION LOG</p><h2>Record expense</h2></div><button type="button" class="close-modal" data-close="expenseDialog" aria-label="Close">×</button></div><label>Description<input id="expenseDescription" required maxlength="100" placeholder="e.g. Stage lighting"></label><div class="form-row"><label>Category<select id="expenseCategory"><option>Venue</option><option>Food</option><option>Decoration</option><option>Transportation</option><option>Equipment</option><option>Other</option></select></label><label>Amount (₹)<input id="expenseAmount" type="number" min="1" required placeholder="5000"></label></div><label>Date<input id="expenseDate" type="date" required></label><div class="modal-actions"><button type="button" class="button button-outline" data-close="expenseDialog">Cancel</button><button type="submit" class="button button-primary">Save expense</button></div></form></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+/* EventFlow demo
+   Data structures shown in this application:
+   1) Array-based priority queue: tasks sorted by priority (1 = high).
+   2) Binary search: searches expense records after sorting by numeric ID.
+   Demo data persists in localStorage in this browser.
+*/
+const STORAGE_KEY = "eventflow-demo-v1";
+const categories = ["Venue", "Food", "Decoration", "Transportation", "Equipment", "Other"];
+const categoryColors = {Venue:"#7667e8", Food:"#f0a64a", Decoration:"#55b99a", Transportation:"#4e91e8", Equipment:"#e87991", Other:"#a5a5b4"};
+const eventColors = [{bg:"#eeeaff",fg:"#7667e8",icon:"✦"},{bg:"#e8f5ff",fg:"#4e91e8",icon:"◈"},{bg:"#fff0e3",fg:"#e99b43",icon:"✳"},{bg:"#e7f8ef",fg:"#2fa67a",icon:"✧"}];
+const defaultData = {
+  budget:250000,
+  events:[
+    {id:1,name:"Annual Tech Summit",date:"2026-11-12",venue:"AJCE Main Auditorium",budget:90000,description:"A full-day technology summit with talks and student showcases.",status:"Confirmed"},
+    {id:2,name:"Cultural Night",date:"2026-11-20",venue:"College Open Ground",budget:65000,description:"Music, dance and cultural performances.",status:"Planning"},
+    {id:3,name:"Developer Workshop",date:"2026-11-05",venue:"Innovation Lab",budget:45000,description:"Hands-on workshops and coding sessions.",status:"In progress"},
+    {id:4,name:"Sports Meet",date:"2026-12-03",venue:"College Sports Complex",budget:50000,description:"Inter-department sports competition.",status:"Confirmed"}
+  ],
+  tasks:[
+    {id:1,title:"Confirm auditorium booking",priority:1,done:false},
+    {id:2,title:"Finalize catering headcount",priority:1,done:false},
+    {id:3,title:"Send speaker invitations",priority:2,done:false},
+    {id:4,title:"Prepare event posters",priority:2,done:false},
+    {id:5,title:"Arrange volunteer schedule",priority:3,done:false}
+  ],
+  expenses:[
+    {id:1001,description:"Auditorium advance",category:"Venue",date:"2026-10-15",amount:30000},
+    {id:1002,description:"Catering deposit",category:"Food",date:"2026-10-16",amount:22000},
+    {id:1003,description:"Stage backdrop",category:"Decoration",date:"2026-10-17",amount:12500},
+    {id:1004,description:"Speaker travel",category:"Transportation",date:"2026-10-18",amount:8000},
+    {id:1005,description:"Audio equipment rental",category:"Equipment",date:"2026-10-19",amount:18000},
+    {id:1006,description:"Volunteer T-shirts",category:"Other",date:"2026-10-20",amount:34000}
+  ],
+  nextEventId:5,nextTaskId:6,nextExpenseId:1007
+};
+let data = loadData();
+let visibleExpenseIds = null;
+let toastTimer;
+
+function loadData(){
+  try { const raw=localStorage.getItem(STORAGE_KEY); if(raw){const parsed=JSON.parse(raw); if(parsed.events&&parsed.tasks&&parsed.expenses)return parsed;} } catch(e){console.warn("Could not load saved demo data",e);}
+  return structuredClone(defaultData);
+}
+function saveData(){ localStorage.setItem(STORAGE_KEY,JSON.stringify(data)); }
+function money(value){return new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR",maximumFractionDigits:0}).format(Number(value)||0);}
+function compactMoney(value){const n=Number(value)||0;return n>=100000?`₹${(n/100000).toFixed(2)}L`:n>=1000?`₹${(n/1000).toFixed(1)}k`:money(n);}
+function dateLabel(value){if(!value)return "—";return new Date(value+"T00:00:00").toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});}
+function escapeHTML(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function showToast(message){const el=document.getElementById("toast");el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),2600);}
+function sortTasks(){data.tasks.sort((a,b)=>a.priority-b.priority || Number(a.done)-Number(b.done) || a.id-b.id);}
+function sortExpenses(){data.expenses.sort((a,b)=>a.id-b.id);}
+function totalExpenses(){return data.expenses.reduce((sum,e)=>sum+Number(e.amount),0);}
+function render(){
+  sortTasks();sortExpenses();renderStats();renderTasks();renderEvents();renderExpenses();renderBudget();saveData();
+}
+function renderStats(){
+  document.getElementById("totalEvents").textContent=String(data.events.length).padStart(2,"0");
+  document.getElementById("pendingTasks").textContent=String(data.tasks.filter(t=>!t.done).length).padStart(2,"0");
+  document.getElementById("totalBudget").textContent=money(data.budget);
+  document.getElementById("totalExpenses").textContent=money(totalExpenses());
+  const percent=data.budget>0?totalExpenses()/data.budget*100:0;
+  document.getElementById("expensePercent").textContent=`${percent.toFixed(1)}% used`;
+}
+function renderTasks(){
+  const list=document.getElementById("taskList");
+  document.getElementById("taskCount").textContent=`${data.tasks.length} task${data.tasks.length===1?"":"s"}`;
+  const priorityName={1:"High",2:"Medium",3:"Low"};
+  if(!data.tasks.length){list.innerHTML='<div class="empty-state">No tasks yet. Add one above.</div>';return;}
+  list.innerHTML=data.tasks.map(t=>`<div class="task-item"><input class="task-check" type="checkbox" data-task-done="${t.id}" ${t.done?"checked":""} aria-label="Mark ${escapeHTML(t.title)} complete"><span class="task-title ${t.done?"done":""}">${escapeHTML(t.title)}</span><span class="priority-tag ${priorityName[t.priority].toLowerCase()}">${priorityName[t.priority]}</span><button class="task-delete" data-task-delete="${t.id}" aria-label="Delete task">×</button></div>`).join("");
+}
+function renderEvents(){
+  const tbody=document.getElementById("eventTable");
+  const sorted=[...data.events].sort((a,b)=>a.date.localeCompare(b.date));
+  document.getElementById("eventCountLabel").textContent=`Showing ${sorted.length} event${sorted.length===1?"":"s"}`;
+  if(!sorted.length){tbody.innerHTML='<tr><td colspan="6" class="empty-state">No events yet. Create your first event.</td></tr>';return;}
+  tbody.innerHTML=sorted.map((e,i)=>{const c=eventColors[i%eventColors.length];const status=e.status.toLowerCase().replace(/\s/g,"-");return `<tr><td><div class="event-name-cell"><span class="event-color" style="background:${c.bg};color:${c.fg}">${c.icon}</span><span><strong>${escapeHTML(e.name)}</strong><small>${escapeHTML(e.description||"Event details")}</small></span></div></td><td>${dateLabel(e.date)}</td><td>${escapeHTML(e.venue)}</td><td class="event-budget">${money(e.budget)}</td><td><span class="event-status ${status}">${escapeHTML(e.status)}</span></td><td><div class="event-actions"><button class="row-action" data-edit-event="${e.id}" title="Edit event" aria-label="Edit ${escapeHTML(e.name)}">✎</button><button class="row-action" data-delete-event="${e.id}" title="Delete event" aria-label="Delete ${escapeHTML(e.name)}">×</button></div></td></tr>`;}).join("");
+}
+function renderExpenses(ids=null){
+  const tbody=document.getElementById("expenseTable");
+  const sorted=[...data.expenses].sort((a,b)=>a.id-b.id);
+  const shown=ids?sorted.filter(e=>ids.includes(e.id)):sorted;
+  document.getElementById("expenseCount").textContent=`${shown.length} record${shown.length===1?"":"s"}`;
+  if(!shown.length){tbody.innerHTML='<tr><td colspan="6" class="empty-state">No matching expense records.</td></tr>';return;}
+  tbody.innerHTML=shown.map(e=>`<tr><td><span class="expense-id">#${e.id}</span></td><td style="color:#454552;font-weight:600">${escapeHTML(e.description)}</td><td><span class="category-label"><i style="background:${categoryColors[e.category]||categoryColors.Other}"></i>${escapeHTML(e.category)}</span></td><td>${dateLabel(e.date)}</td><td class="amount-cell">${money(e.amount)}</td><td><button class="row-action" data-delete-expense="${e.id}" title="Delete expense" aria-label="Delete expense ${e.id}">×</button></td></tr>`).join("");
+}
+function renderBudget(){
+  const spent=totalExpenses(),remaining=data.budget-spent,percent=data.budget>0?spent/data.budget*100:0;
+  document.getElementById("remainingBalance").textContent=money(remaining);
+  document.getElementById("remainingBalance").style.color=remaining<0?"#d95f6b":"";
+  document.getElementById("budgetNote").textContent=remaining<0?"Over allocated budget":"Within allocated budget";
+  document.getElementById("allocatedBudgetText").textContent=money(data.budget);
+  document.getElementById("allocatedBudget").value=data.budget;
+  document.getElementById("chartSpent").textContent=compactMoney(spent);
+  document.getElementById("chartPercent").textContent=`${percent.toFixed(1)}% of budget`;
+  const totals=categories.map(cat=>({name:cat,value:data.expenses.filter(e=>e.category===cat).reduce((s,e)=>s+Number(e.amount),0),color:categoryColors[cat]})).filter(x=>x.value>0);
+  document.getElementById("chartLegend").innerHTML=totals.length?totals.map(x=>`<div class="legend-item"><i class="legend-dot" style="background:${x.color}"></i><span>${x.name}</span><strong>${money(x.value)}</strong></div>`).join(""):'<div class="legend-item">No expenses recorded yet.</div>';
+  drawChart(totals,spent);
+}
+function drawChart(items,spent){
+  const canvas=document.getElementById("budgetChart"),ctx=canvas.getContext("2d");
+  const rect=canvas.getBoundingClientRect(),dpr=window.devicePixelRatio||1;
+  canvas.width=Math.max(1,rect.width*dpr);canvas.height=Math.max(1,rect.height*dpr);ctx.scale(dpr,dpr);
+  const w=rect.width,h=rect.height,cx=w/2,cy=h/2,r=Math.min(w,h)*.39,line=Math.max(17,Math.min(w,h)*.105);
+  ctx.clearRect(0,0,w,h);ctx.lineWidth=line;ctx.lineCap="round";
+  ctx.beginPath();ctx.strokeStyle="#f0eff7";ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();
+  if(!items.length)return;
+  const total=items.reduce((s,x)=>s+x.value,0);let angle=-Math.PI/2;const gap=.035;
+  items.forEach(item=>{const sweep=item.value/total*Math.PI*2;ctx.beginPath();ctx.strokeStyle=item.color;ctx.arc(cx,cy,r,angle+gap/2,angle+sweep-gap/2);ctx.stroke();angle+=sweep;});
+}
+function binarySearchExpense(id){
+  // Binary search requires a sorted list. sortExpenses() guarantees ascending IDs.
+  const records=[...data.expenses].sort((a,b)=>a.id-b.id);let low=0,high=records.length-1,steps=0;
+  while(low<=high){steps++;const mid=Math.floor((low+high)/2),midId=records[mid].id;if(midId===id)return {record:records[mid],steps};if(midId<id)low=mid+1;else high=mid-1;}
+  return {record:null,steps};
+}
+function openEventDialog(event=null){
+  const form=document.getElementById("eventForm");form.reset();
+  document.getElementById("eventModalTitle").textContent=event?"Edit event":"Create event";
+  document.getElementById("eventId").value=event?event.id:"";
+  document.getElementById("eventName").value=event?.name||"";
+  document.getElementById("eventDate").value=event?.date||"";
+  document.getElementById("eventBudget").value=event?.budget??"";
+  document.getElementById("eventVenue").value=event?.venue||"";
+  document.getElementById("eventDescription").value=event?.description||"";
+  document.getElementById("eventDialog").showModal();
+}
+function openExpenseDialog(){document.getElementById("expenseForm").reset();document.getElementById("expenseDate").value=new Date().toISOString().slice(0,10);document.getElementById("expenseDialog").showModal();}
+function closeDialog(id){document.getElementById(id).close();}
+document.getElementById("eventForm").addEventListener("submit",e=>{
+  e.preventDefault();const id=document.getElementById("eventId").value;
+  const event={name:document.getElementById("eventName").value.trim(),date:document.getElementById("eventDate").value,venue:document.getElementById("eventVenue").value.trim(),budget:Number(document.getElementById("eventBudget").value),description:document.getElementById("eventDescription").value.trim(),status:"Planning"};
+  if(!event.name||!event.venue||event.budget<0)return;
+  if(id){const old=data.events.find(x=>x.id===Number(id));if(old)Object.assign(old,event);showToast("Event updated.");}
+  else{event.id=data.nextEventId++;data.events.push(event);showToast("Event created.");}
+  closeDialog("eventDialog");render();
+});
+document.getElementById("expenseForm").addEventListener("submit",e=>{
+  e.preventDefault();const amount=Number(document.getElementById("expenseAmount").value);
+  if(amount<=0)return;
+  data.expenses.push({id:data.nextExpenseId++,description:document.getElementById("expenseDescription").value.trim(),category:document.getElementById("expenseCategory").value,amount,date:document.getElementById("expenseDate").value});
+  closeDialog("expenseDialog");visibleExpenseIds=null;render();showToast("Expense recorded.");
+});
+document.getElementById("taskForm").addEventListener("submit",e=>{
+  e.preventDefault();const input=document.getElementById("taskTitle"),title=input.value.trim();if(!title)return;
+  data.tasks.push({id:data.nextTaskId++,title,priority:Number(document.getElementById("taskPriority").value),done:false});input.value="";render();showToast("Task added to the priority queue.");
+});
+document.getElementById("taskList").addEventListener("change",e=>{
+  const id=Number(e.target.dataset.taskDone);if(!id)return;const task=data.tasks.find(t=>t.id===id);if(task){task.done=e.target.checked;render();}
+});
+document.getElementById("taskList").addEventListener("click",e=>{
+  const id=Number(e.target.dataset.taskDelete);if(!id)return;data.tasks=data.tasks.filter(t=>t.id!==id);render();showToast("Task deleted.");
+});
+document.getElementById("eventTable").addEventListener("click",e=>{
+  const edit=Number(e.target.closest("[data-edit-event]")?.dataset.editEvent);
+  const del=Number(e.target.closest("[data-delete-event]")?.dataset.deleteEvent);
+  if(edit){const event=data.events.find(x=>x.id===edit);if(event)openEventDialog(event);}
+  if(del&&confirm("Delete this event?")){data.events=data.events.filter(x=>x.id!==del);render();showToast("Event deleted.");}
+});
+document.getElementById("expenseTable").addEventListener("click",e=>{
+  const id=Number(e.target.closest("[data-delete-expense]")?.dataset.deleteExpense);if(!id)return;
+  if(confirm(`Delete expense #${id}?`)){data.expenses=data.expenses.filter(x=>x.id!==id);visibleExpenseIds=null;render();showToast("Expense deleted.");}
+});
+document.getElementById("saveBudget").addEventListener("click",()=>{
+  const value=Number(document.getElementById("allocatedBudget").value);
+  if(!Number.isFinite(value)||value<0){showToast("Enter a valid non-negative budget.");return;}
+  data.budget=value;render();showToast("Allocated budget updated.");
+});
+document.getElementById("expenseSearchForm").addEventListener("submit",e=>{
+  e.preventDefault();const raw=document.getElementById("expenseSearchId").value;const id=Number(raw);const feedback=document.getElementById("searchFeedback");
+  if(!raw||!Number.isInteger(id)){feedback.className="search-feedback error";feedback.textContent="Enter a valid numeric expense ID.";return;}
+  const result=binarySearchExpense(id);
+  if(result.record){visibleExpenseIds=[id];renderExpenses(visibleExpenseIds);feedback.className="search-feedback success";feedback.textContent=`Found expense #${id} in ${result.steps} binary-search step${result.steps===1?"":"s"}. Sorted IDs were searched by repeatedly halving the range.`;}
+  else{visibleExpenseIds=[];renderExpenses(visibleExpenseIds);feedback.className="search-feedback error";feedback.textContent=`Expense #${id} was not found after ${result.steps} step${result.steps===1?"":"s"}. Try one of the IDs shown in the sample data (1001–1006).`;}
+});
+document.getElementById("showAllExpenses").addEventListener("click",()=>{visibleExpenseIds=null;document.getElementById("expenseSearchId").value="";document.getElementById("searchFeedback").className="search-feedback";document.getElementById("searchFeedback").textContent="Showing all expense records. IDs are kept sorted for binary search.";renderExpenses();});
+document.getElementById("addEvent").addEventListener("click",()=>openEventDialog());
+document.getElementById("addEventTop").addEventListener("click",()=>openEventDialog());
+document.getElementById("addExpense").addEventListener("click",openExpenseDialog);
+document.querySelectorAll("[data-close]").forEach(btn=>btn.addEventListener("click",()=>closeDialog(btn.dataset.close)));
+document.getElementById("resetDemo").addEventListener("click",()=>{
+  if(confirm("Reset all changes and restore the original sample data?")){data=structuredClone(defaultData);visibleExpenseIds=null;render();document.getElementById("searchFeedback").className="search-feedback";document.getElementById("searchFeedback").textContent="Tip: search IDs are sorted before binary search is performed.";showToast("Sample data restored.");}
+});
+document.getElementById("mobileMenu").addEventListener("click",()=>document.getElementById("sidebar").classList.toggle("open"));
+document.querySelectorAll(".nav-link").forEach(link=>link.addEventListener("click",()=>document.getElementById("sidebar").classList.remove("open")));
+window.addEventListener("resize",()=>{clearTimeout(window._chartResize);window._chartResize=setTimeout(()=>renderBudget(),120);});
+render();
+
+  </script>
+</body>
+</html>
